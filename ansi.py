@@ -340,6 +340,11 @@ class AnsiColorBuildCommand(Default.exec.ExecCommand):
             json_ansi_regions.update(region.jsonable())
 
         # send on_data without ansi codes
+        import winsound         # for sound 
+        import sys
+        if '' in out_data:
+        	sys.stdout.write("\a")
+        	winsound.PlaySound("*", winsound.SND_ALIAS)
         super(AnsiColorBuildCommand, self).on_data(proc, out_data.encode(self.encoding))
 
         # send ansi command
